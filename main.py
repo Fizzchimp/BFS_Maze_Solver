@@ -22,7 +22,7 @@ class World:
         self.end = None
 
 
-    def BuildMaze(self):
+    def buildMaze(self):
         x = y =0
         for row in range(len(GRID)):
             for col in range( len(GRID[row])):
@@ -48,12 +48,41 @@ class World:
 
     def findPath(self):
         o_nodes = LQueue(999)
-        v_nodes = LQueue(999)
+        v_nodes = []
         nodePath = []
         
         node = PositionNode(self.player[0], self.player[1])
         
         o_nodes.enqueue(node)
-
+        
+        while not o_nodes.isemtpy():
+            current = o_nodes.dequeue()
+            v_nodes.append(current)
+            x, y = current.position
+            
+            if current.position == self.end:
+                nodePath = []
+                
+                while current.position != self.player:
+                    x, y = current.position
+                    nodePath.append(current)
+                    current = current.parent
+                    
+                nodePath.reverse()
+                return nodePath
+            
+            neighbours = [PositionNode(x - 1, y, current),
+                          PositionNode(x, y - 1, current),
+                          PositionNode(x + 1, y, current),
+                          PositionNode(x, y + 1, current)]
+            
+            for z in neighbours:
+                x, y = z.position
+                
+                if MAP[x][y] != "#" and z not in v_nodes and not o_nodes.search(z):
+                    o_nodes.enqueue(z)
+        return False
 
     def runWorld(self):
+        self.buildMaze
+        steps = self.findPath
