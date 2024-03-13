@@ -32,3 +32,8 @@ class LQueue:
     print(self.queue)
     print(f"Front: {self.queue[self.front]}, Pos: {self.front}")
     print(f"Rear: {self.queue[self.rear]}, Pos: {self.rear}")
+    
+  def search(self, item):
+    if item in self.queue:
+      return True
+    return False  
