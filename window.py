@@ -40,5 +40,5 @@ class Window:
         self.playerImage.goto(x, y)
         
     def DrawLine(self, x, y):
-        self.line.pendown()        
         self.line.goto(x, y)
+        self.line.pendown()        

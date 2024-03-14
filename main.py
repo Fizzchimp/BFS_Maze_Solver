@@ -43,6 +43,7 @@ class World:
                 if grid_mark == "S":
                     self.player = (col, row)
                     self.window.DrawPlayer(x + IMAGE_OFFSET,y - IMAGE_OFFSET)
+                    self.window.DrawLine(x + IMAGE_OFFSET,y - IMAGE_OFFSET)
 
     def findPath(self):
         o_nodes = LQueue(999)
@@ -57,8 +58,8 @@ class World:
             v_nodes.enqueue(current)
             x, y = current.position
 
-            self.window.DrawPlayer(LEFT + 25 * (x + 1), TOP - 25 * (y + 1))
-            self.window.screen.update()
+            # self.window.DrawPlayer(LEFT + 25 * (x + 1), TOP - 25 * (y + 1))
+            # self.window.screen.update()
 
             if current.position == self.end:
                 print("Path found")
@@ -90,7 +91,7 @@ class World:
             self.window.screen.update()
 
             if steps != []:
-                time.sleep(0.01)
+                # time.sleep(0.05)
                 node = steps.pop(0)
                 x, y = node.position
                 x = LEFT + 25 * (x + 1)
