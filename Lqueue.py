@@ -34,6 +34,7 @@ class LQueue:
     print(f"Rear: {self.queue[self.rear]}, Pos: {self.rear}")
     
   def search(self, item):
-    if item in self.queue:
-      return True
-    return False  
+    for i in range(self.front, self.rear + 1):
+      if item.position == self.queue[i].position:
+        return True
+    return False   
