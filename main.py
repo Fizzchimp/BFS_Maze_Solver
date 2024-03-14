@@ -23,7 +23,7 @@ class World:
 
 
     def buildMaze(self):
-        x = y =0
+        x = y = 0
         for row in range(len(GRID)):
             for col in range(len(GRID[row])):
                 grid_mark = GRID[row][col]
@@ -48,22 +48,20 @@ class World:
         o_nodes = LQueue(999)
         v_nodes = LQueue(999)
         nodePath = []
-        node = PositionNode(self.player[0], self.player[1], None)
         
+        node = PositionNode(self.player[0], self.player[1], None)
         o_nodes.enqueue(node)
+        
         while not o_nodes.isEmpty():
             current = o_nodes.dequeue()
             v_nodes.enqueue(current)
             x, y = current.position
 
-            self.window.DrawPlayer(LEFT + 25 * x, TOP - 25 * y)
-            time.sleep(0.1)
+            self.window.DrawPlayer(LEFT + 25 * (x + 1), TOP - 25 * (y + 1))
             self.window.screen.update()
 
-            print(current.position, self.end)
             if current.position == self.end:
-                print("FOUND")
-                
+                print("Path found")
                 while current.position != self.player:
                     print(current.position)
                     x, y = current.position
@@ -80,23 +78,24 @@ class World:
             
             for z in neighbours:
                 x, y = z.position
-                if MAP[x][y] != "#" and not v_nodes.search(z) and not o_nodes.search(z):
+                if MAP[y][x] != "#" and not v_nodes.search(z) and not o_nodes.search(z):
                     o_nodes.enqueue(z)
         return False
 
     def runWorld(self):
         self.buildMaze()
+        print("World built")
         steps = self.findPath()
 
         while True:
             self.window.screen.update()
 
             if steps != []:
-                time.sleep(0.5)
+                time.sleep(0.1)
                 node = steps.pop(0)
                 x, y = node.position
-                x = LEFT + 25 * x
-                y = TOP - 25 * y
+                x = LEFT + 25 * (x + 1)
+                y = TOP - 25 * (y + 1)
                 self.window.DrawPlayer(x, y)
 
 world = World()

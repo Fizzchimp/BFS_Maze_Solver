@@ -24,8 +24,10 @@ class LQueue:
   
   def dequeue(self):
     if not self.isEmpty():
+      item = self.queue[self.front]
       self.queue[self.front] = None
       self.front += 1
+      return item
     else: print("Queue is empty.")
       
   def display(self):
