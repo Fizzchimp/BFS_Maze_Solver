@@ -8,6 +8,11 @@ class Window:
         self.screen.setup(width, height)
         self.screen.tracer(0)
         
+        self.line = turtle.Turtle()
+        self.line.color("#000000")
+        self.line.penup()
+        self.line.hideturtle()
+        
         # create a turtle for drawing static objects in our maze
         self.image = turtle.Turtle()
         self.image.shape("square")                       
@@ -31,5 +36,9 @@ class Window:
         self.image.goto(x, y)
         self.image.stamp()    
         
-    def DrawPlayer(self, x, y):  
+    def DrawPlayer(self, x, y):
         self.playerImage.goto(x, y)
+        
+    def DrawLine(self, x, y):
+        self.line.pendown()        
+        self.line.goto(x, y)

@@ -63,7 +63,6 @@ class World:
             if current.position == self.end:
                 print("Path found")
                 while current.position != self.player:
-                    print(current.position)
                     x, y = current.position
                     nodePath.append(current)
                     current = current.parent
@@ -91,12 +90,13 @@ class World:
             self.window.screen.update()
 
             if steps != []:
-                time.sleep(0.1)
+                time.sleep(0.01)
                 node = steps.pop(0)
                 x, y = node.position
                 x = LEFT + 25 * (x + 1)
                 y = TOP - 25 * (y + 1)
                 self.window.DrawPlayer(x, y)
+                self.window.DrawLine(x, y)
 
 world = World()
 world.runWorld()
