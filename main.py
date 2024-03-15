@@ -58,8 +58,8 @@ class World:
             v_nodes.enqueue(current)
             x, y = current.position
 
-            # self.window.DrawPlayer(LEFT + 25 * (x + 1), TOP - 25 * (y + 1))
-            # self.window.screen.update()
+            self.window.DrawPlayer(LEFT + 25 * (x + 1), TOP - 25 * (y + 1))
+            self.window.screen.update()
 
             if current.position == self.end:
                 print("Path found")
